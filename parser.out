@@ -1,0 +1,1481 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> stmt
+Rule 2     stmt -> block
+Rule 3     stmt -> ID ASSIGN aexp ;
+Rule 4     stmt -> stmt stmt
+Rule 5     stmt -> GET ID ;
+Rule 6     stmt -> PUT exp ;
+Rule 7     stmt -> IF ( bexp ) THEN block opt_else END
+Rule 8     stmt -> WHILE ( bexp ) DO block END
+Rule 9     opt_else -> ELSE block
+Rule 10    opt_else -> empty
+Rule 11    block -> { }
+Rule 12    block -> { stmt }
+Rule 13    exp -> aexp
+Rule 14    exp -> bexp
+Rule 15    bexp -> BOOL
+Rule 16    bexp -> aexp EQ aexp
+Rule 17    bexp -> aexp NE aexp
+Rule 18    bexp -> aexp LT aexp
+Rule 19    bexp -> aexp GT aexp
+Rule 20    bexp -> aexp LE aexp
+Rule 21    bexp -> aexp GE aexp
+Rule 22    bexp -> NOT bexp
+Rule 23    bexp -> bexp AND bexp
+Rule 24    bexp -> bexp OR bexp
+Rule 25    aexp -> INT
+Rule 26    aexp -> ID
+Rule 27    aexp -> aexp PLUS aexp
+Rule 28    aexp -> aexp MINUS aexp
+Rule 29    aexp -> aexp TIMES aexp
+Rule 30    aexp -> aexp DIVIDE aexp
+Rule 31    aexp -> MINUS exp
+Rule 32    empty -> <empty>
+
+Terminals, with rules where they appear
+
+(                    : 7 8
+)                    : 7 8
+;                    : 3 5 6
+AND                  : 23
+ASSIGN               : 3
+BOOL                 : 15
+DIVIDE               : 30
+DO                   : 8
+ELSE                 : 9
+END                  : 7 8
+EQ                   : 16
+GE                   : 21
+GET                  : 5
+GT                   : 19
+ID                   : 3 5 26
+IF                   : 7
+INT                  : 25
+LE                   : 20
+LT                   : 18
+MINUS                : 28 31
+NE                   : 17
+NOT                  : 22
+OR                   : 24
+PLUS                 : 27
+PUT                  : 6
+THEN                 : 7
+TIMES                : 29
+WHILE                : 8
+error                : 
+{                    : 11 12
+}                    : 11 12
+
+Nonterminals, with rules where they appear
+
+aexp                 : 3 13 16 16 17 17 18 18 19 19 20 20 21 21 27 27 28 28 29 29 30 30
+bexp                 : 7 8 14 22 23 23 24 24
+block                : 2 7 8 9
+empty                : 10
+exp                  : 6 31
+opt_else             : 7
+program              : 0
+stmt                 : 1 4 4 12
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . stmt
+    (2) stmt -> . block
+    (3) stmt -> . ID ASSIGN aexp ;
+    (4) stmt -> . stmt stmt
+    (5) stmt -> . GET ID ;
+    (6) stmt -> . PUT exp ;
+    (7) stmt -> . IF ( bexp ) THEN block opt_else END
+    (8) stmt -> . WHILE ( bexp ) DO block END
+    (11) block -> . { }
+    (12) block -> . { stmt }
+
+    ID              shift and go to state 4
+    GET             shift and go to state 5
+    PUT             shift and go to state 6
+    IF              shift and go to state 7
+    WHILE           shift and go to state 8
+    {               shift and go to state 9
+
+    program                        shift and go to state 1
+    stmt                           shift and go to state 2
+    block                          shift and go to state 3
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> stmt .
+    (4) stmt -> stmt . stmt
+    (2) stmt -> . block
+    (3) stmt -> . ID ASSIGN aexp ;
+    (4) stmt -> . stmt stmt
+    (5) stmt -> . GET ID ;
+    (6) stmt -> . PUT exp ;
+    (7) stmt -> . IF ( bexp ) THEN block opt_else END
+    (8) stmt -> . WHILE ( bexp ) DO block END
+    (11) block -> . { }
+    (12) block -> . { stmt }
+
+    $end            reduce using rule 1 (program -> stmt .)
+    ID              shift and go to state 4
+    GET             shift and go to state 5
+    PUT             shift and go to state 6
+    IF              shift and go to state 7
+    WHILE           shift and go to state 8
+    {               shift and go to state 9
+
+    stmt                           shift and go to state 10
+    block                          shift and go to state 3
+
+state 3
+
+    (2) stmt -> block .
+
+    ID              reduce using rule 2 (stmt -> block .)
+    GET             reduce using rule 2 (stmt -> block .)
+    PUT             reduce using rule 2 (stmt -> block .)
+    IF              reduce using rule 2 (stmt -> block .)
+    WHILE           reduce using rule 2 (stmt -> block .)
+    {               reduce using rule 2 (stmt -> block .)
+    $end            reduce using rule 2 (stmt -> block .)
+    }               reduce using rule 2 (stmt -> block .)
+
+
+state 4
+
+    (3) stmt -> ID . ASSIGN aexp ;
+
+    ASSIGN          shift and go to state 11
+
+
+state 5
+
+    (5) stmt -> GET . ID ;
+
+    ID              shift and go to state 12
+
+
+state 6
+
+    (6) stmt -> PUT . exp ;
+    (13) exp -> . aexp
+    (14) exp -> . bexp
+    (25) aexp -> . INT
+    (26) aexp -> . ID
+    (27) aexp -> . aexp PLUS aexp
+    (28) aexp -> . aexp MINUS aexp
+    (29) aexp -> . aexp TIMES aexp
+    (30) aexp -> . aexp DIVIDE aexp
+    (31) aexp -> . MINUS exp
+    (15) bexp -> . BOOL
+    (16) bexp -> . aexp EQ aexp
+    (17) bexp -> . aexp NE aexp
+    (18) bexp -> . aexp LT aexp
+    (19) bexp -> . aexp GT aexp
+    (20) bexp -> . aexp LE aexp
+    (21) bexp -> . aexp GE aexp
+    (22) bexp -> . NOT bexp
+    (23) bexp -> . bexp AND bexp
+    (24) bexp -> . bexp OR bexp
+
+    INT             shift and go to state 16
+    ID              shift and go to state 17
+    MINUS           shift and go to state 18
+    BOOL            shift and go to state 19
+    NOT             shift and go to state 20
+
+    exp                            shift and go to state 13
+    aexp                           shift and go to state 14
+    bexp                           shift and go to state 15
+
+state 7
+
+    (7) stmt -> IF . ( bexp ) THEN block opt_else END
+
+    (               shift and go to state 21
+
+
+state 8
+
+    (8) stmt -> WHILE . ( bexp ) DO block END
+
+    (               shift and go to state 22
+
+
+state 9
+
+    (11) block -> { . }
+    (12) block -> { . stmt }
+    (2) stmt -> . block
+    (3) stmt -> . ID ASSIGN aexp ;
+    (4) stmt -> . stmt stmt
+    (5) stmt -> . GET ID ;
+    (6) stmt -> . PUT exp ;
+    (7) stmt -> . IF ( bexp ) THEN block opt_else END
+    (8) stmt -> . WHILE ( bexp ) DO block END
+    (11) block -> . { }
+    (12) block -> . { stmt }
+
+    }               shift and go to state 23
+    ID              shift and go to state 4
+    GET             shift and go to state 5
+    PUT             shift and go to state 6
+    IF              shift and go to state 7
+    WHILE           shift and go to state 8
+    {               shift and go to state 9
+
+    stmt                           shift and go to state 24
+    block                          shift and go to state 3
+
+state 10
+
+    (4) stmt -> stmt stmt .
+    (4) stmt -> stmt . stmt
+    (2) stmt -> . block
+    (3) stmt -> . ID ASSIGN aexp ;
+    (4) stmt -> . stmt stmt
+    (5) stmt -> . GET ID ;
+    (6) stmt -> . PUT exp ;
+    (7) stmt -> . IF ( bexp ) THEN block opt_else END
+    (8) stmt -> . WHILE ( bexp ) DO block END
+    (11) block -> . { }
+    (12) block -> . { stmt }
+
+  ! shift/reduce conflict for ID resolved as shift
+  ! shift/reduce conflict for GET resolved as shift
+  ! shift/reduce conflict for PUT resolved as shift
+  ! shift/reduce conflict for IF resolved as shift
+  ! shift/reduce conflict for WHILE resolved as shift
+  ! shift/reduce conflict for { resolved as shift
+    $end            reduce using rule 4 (stmt -> stmt stmt .)
+    }               reduce using rule 4 (stmt -> stmt stmt .)
+    ID              shift and go to state 4
+    GET             shift and go to state 5
+    PUT             shift and go to state 6
+    IF              shift and go to state 7
+    WHILE           shift and go to state 8
+    {               shift and go to state 9
+
+  ! ID              [ reduce using rule 4 (stmt -> stmt stmt .) ]
+  ! GET             [ reduce using rule 4 (stmt -> stmt stmt .) ]
+  ! PUT             [ reduce using rule 4 (stmt -> stmt stmt .) ]
+  ! IF              [ reduce using rule 4 (stmt -> stmt stmt .) ]
+  ! WHILE           [ reduce using rule 4 (stmt -> stmt stmt .) ]
+  ! {               [ reduce using rule 4 (stmt -> stmt stmt .) ]
+
+    stmt                           shift and go to state 10
+    block                          shift and go to state 3
+
+state 11
+
+    (3) stmt -> ID ASSIGN . aexp ;
+    (25) aexp -> . INT
+    (26) aexp -> . ID
+    (27) aexp -> . aexp PLUS aexp
+    (28) aexp -> . aexp MINUS aexp
+    (29) aexp -> . aexp TIMES aexp
+    (30) aexp -> . aexp DIVIDE aexp
+    (31) aexp -> . MINUS exp
+
+    INT             shift and go to state 16
+    ID              shift and go to state 17
+    MINUS           shift and go to state 18
+
+    aexp                           shift and go to state 25
+
+state 12
+
+    (5) stmt -> GET ID . ;
+
+    ;               shift and go to state 26
+
+
+state 13
+
+    (6) stmt -> PUT exp . ;
+
+    ;               shift and go to state 27
+
+
+state 14
+
+    (13) exp -> aexp .
+    (27) aexp -> aexp . PLUS aexp
+    (28) aexp -> aexp . MINUS aexp
+    (29) aexp -> aexp . TIMES aexp
+    (30) aexp -> aexp . DIVIDE aexp
+    (16) bexp -> aexp . EQ aexp
+    (17) bexp -> aexp . NE aexp
+    (18) bexp -> aexp . LT aexp
+    (19) bexp -> aexp . GT aexp
+    (20) bexp -> aexp . LE aexp
+    (21) bexp -> aexp . GE aexp
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for EQ resolved as shift
+  ! shift/reduce conflict for NE resolved as shift
+  ! shift/reduce conflict for LT resolved as shift
+  ! shift/reduce conflict for GT resolved as shift
+  ! shift/reduce conflict for LE resolved as shift
+  ! shift/reduce conflict for GE resolved as shift
+    ;               reduce using rule 13 (exp -> aexp .)
+    AND             reduce using rule 13 (exp -> aexp .)
+    OR              reduce using rule 13 (exp -> aexp .)
+    )               reduce using rule 13 (exp -> aexp .)
+    PLUS            shift and go to state 28
+    MINUS           shift and go to state 29
+    TIMES           shift and go to state 30
+    DIVIDE          shift and go to state 31
+    EQ              shift and go to state 32
+    NE              shift and go to state 33
+    LT              shift and go to state 34
+    GT              shift and go to state 35
+    LE              shift and go to state 36
+    GE              shift and go to state 37
+
+  ! PLUS            [ reduce using rule 13 (exp -> aexp .) ]
+  ! MINUS           [ reduce using rule 13 (exp -> aexp .) ]
+  ! TIMES           [ reduce using rule 13 (exp -> aexp .) ]
+  ! DIVIDE          [ reduce using rule 13 (exp -> aexp .) ]
+  ! EQ              [ reduce using rule 13 (exp -> aexp .) ]
+  ! NE              [ reduce using rule 13 (exp -> aexp .) ]
+  ! LT              [ reduce using rule 13 (exp -> aexp .) ]
+  ! GT              [ reduce using rule 13 (exp -> aexp .) ]
+  ! LE              [ reduce using rule 13 (exp -> aexp .) ]
+  ! GE              [ reduce using rule 13 (exp -> aexp .) ]
+
+
+state 15
+
+    (14) exp -> bexp .
+    (23) bexp -> bexp . AND bexp
+    (24) bexp -> bexp . OR bexp
+
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+    ;               reduce using rule 14 (exp -> bexp .)
+    PLUS            reduce using rule 14 (exp -> bexp .)
+    MINUS           reduce using rule 14 (exp -> bexp .)
+    TIMES           reduce using rule 14 (exp -> bexp .)
+    DIVIDE          reduce using rule 14 (exp -> bexp .)
+    EQ              reduce using rule 14 (exp -> bexp .)
+    NE              reduce using rule 14 (exp -> bexp .)
+    LT              reduce using rule 14 (exp -> bexp .)
+    GT              reduce using rule 14 (exp -> bexp .)
+    LE              reduce using rule 14 (exp -> bexp .)
+    GE              reduce using rule 14 (exp -> bexp .)
+    )               reduce using rule 14 (exp -> bexp .)
+    AND             shift and go to state 38
+    OR              shift and go to state 39
+
+  ! AND             [ reduce using rule 14 (exp -> bexp .) ]
+  ! OR              [ reduce using rule 14 (exp -> bexp .) ]
+
+
+state 16
+
+    (25) aexp -> INT .
+
+    PLUS            reduce using rule 25 (aexp -> INT .)
+    MINUS           reduce using rule 25 (aexp -> INT .)
+    TIMES           reduce using rule 25 (aexp -> INT .)
+    DIVIDE          reduce using rule 25 (aexp -> INT .)
+    EQ              reduce using rule 25 (aexp -> INT .)
+    NE              reduce using rule 25 (aexp -> INT .)
+    LT              reduce using rule 25 (aexp -> INT .)
+    GT              reduce using rule 25 (aexp -> INT .)
+    LE              reduce using rule 25 (aexp -> INT .)
+    GE              reduce using rule 25 (aexp -> INT .)
+    ;               reduce using rule 25 (aexp -> INT .)
+    AND             reduce using rule 25 (aexp -> INT .)
+    OR              reduce using rule 25 (aexp -> INT .)
+    )               reduce using rule 25 (aexp -> INT .)
+
+
+state 17
+
+    (26) aexp -> ID .
+
+    PLUS            reduce using rule 26 (aexp -> ID .)
+    MINUS           reduce using rule 26 (aexp -> ID .)
+    TIMES           reduce using rule 26 (aexp -> ID .)
+    DIVIDE          reduce using rule 26 (aexp -> ID .)
+    EQ              reduce using rule 26 (aexp -> ID .)
+    NE              reduce using rule 26 (aexp -> ID .)
+    LT              reduce using rule 26 (aexp -> ID .)
+    GT              reduce using rule 26 (aexp -> ID .)
+    LE              reduce using rule 26 (aexp -> ID .)
+    GE              reduce using rule 26 (aexp -> ID .)
+    ;               reduce using rule 26 (aexp -> ID .)
+    AND             reduce using rule 26 (aexp -> ID .)
+    OR              reduce using rule 26 (aexp -> ID .)
+    )               reduce using rule 26 (aexp -> ID .)
+
+
+state 18
+
+    (31) aexp -> MINUS . exp
+    (13) exp -> . aexp
+    (14) exp -> . bexp
+    (25) aexp -> . INT
+    (26) aexp -> . ID
+    (27) aexp -> . aexp PLUS aexp
+    (28) aexp -> . aexp MINUS aexp
+    (29) aexp -> . aexp TIMES aexp
+    (30) aexp -> . aexp DIVIDE aexp
+    (31) aexp -> . MINUS exp
+    (15) bexp -> . BOOL
+    (16) bexp -> . aexp EQ aexp
+    (17) bexp -> . aexp NE aexp
+    (18) bexp -> . aexp LT aexp
+    (19) bexp -> . aexp GT aexp
+    (20) bexp -> . aexp LE aexp
+    (21) bexp -> . aexp GE aexp
+    (22) bexp -> . NOT bexp
+    (23) bexp -> . bexp AND bexp
+    (24) bexp -> . bexp OR bexp
+
+    INT             shift and go to state 16
+    ID              shift and go to state 17
+    MINUS           shift and go to state 18
+    BOOL            shift and go to state 19
+    NOT             shift and go to state 20
+
+    exp                            shift and go to state 40
+    aexp                           shift and go to state 14
+    bexp                           shift and go to state 15
+
+state 19
+
+    (15) bexp -> BOOL .
+
+    AND             reduce using rule 15 (bexp -> BOOL .)
+    OR              reduce using rule 15 (bexp -> BOOL .)
+    ;               reduce using rule 15 (bexp -> BOOL .)
+    PLUS            reduce using rule 15 (bexp -> BOOL .)
+    MINUS           reduce using rule 15 (bexp -> BOOL .)
+    TIMES           reduce using rule 15 (bexp -> BOOL .)
+    DIVIDE          reduce using rule 15 (bexp -> BOOL .)
+    EQ              reduce using rule 15 (bexp -> BOOL .)
+    NE              reduce using rule 15 (bexp -> BOOL .)
+    LT              reduce using rule 15 (bexp -> BOOL .)
+    GT              reduce using rule 15 (bexp -> BOOL .)
+    LE              reduce using rule 15 (bexp -> BOOL .)
+    GE              reduce using rule 15 (bexp -> BOOL .)
+    )               reduce using rule 15 (bexp -> BOOL .)
+
+
+state 20
+
+    (22) bexp -> NOT . bexp
+    (15) bexp -> . BOOL
+    (16) bexp -> . aexp EQ aexp
+    (17) bexp -> . aexp NE aexp
+    (18) bexp -> . aexp LT aexp
+    (19) bexp -> . aexp GT aexp
+    (20) bexp -> . aexp LE aexp
+    (21) bexp -> . aexp GE aexp
+    (22) bexp -> . NOT bexp
+    (23) bexp -> . bexp AND bexp
+    (24) bexp -> . bexp OR bexp
+    (25) aexp -> . INT
+    (26) aexp -> . ID
+    (27) aexp -> . aexp PLUS aexp
+    (28) aexp -> . aexp MINUS aexp
+    (29) aexp -> . aexp TIMES aexp
+    (30) aexp -> . aexp DIVIDE aexp
+    (31) aexp -> . MINUS exp
+
+    BOOL            shift and go to state 19
+    NOT             shift and go to state 20
+    INT             shift and go to state 16
+    ID              shift and go to state 17
+    MINUS           shift and go to state 18
+
+    bexp                           shift and go to state 41
+    aexp                           shift and go to state 42
+
+state 21
+
+    (7) stmt -> IF ( . bexp ) THEN block opt_else END
+    (15) bexp -> . BOOL
+    (16) bexp -> . aexp EQ aexp
+    (17) bexp -> . aexp NE aexp
+    (18) bexp -> . aexp LT aexp
+    (19) bexp -> . aexp GT aexp
+    (20) bexp -> . aexp LE aexp
+    (21) bexp -> . aexp GE aexp
+    (22) bexp -> . NOT bexp
+    (23) bexp -> . bexp AND bexp
+    (24) bexp -> . bexp OR bexp
+    (25) aexp -> . INT
+    (26) aexp -> . ID
+    (27) aexp -> . aexp PLUS aexp
+    (28) aexp -> . aexp MINUS aexp
+    (29) aexp -> . aexp TIMES aexp
+    (30) aexp -> . aexp DIVIDE aexp
+    (31) aexp -> . MINUS exp
+
+    BOOL            shift and go to state 19
+    NOT             shift and go to state 20
+    INT             shift and go to state 16
+    ID              shift and go to state 17
+    MINUS           shift and go to state 18
+
+    bexp                           shift and go to state 43
+    aexp                           shift and go to state 42
+
+state 22
+
+    (8) stmt -> WHILE ( . bexp ) DO block END
+    (15) bexp -> . BOOL
+    (16) bexp -> . aexp EQ aexp
+    (17) bexp -> . aexp NE aexp
+    (18) bexp -> . aexp LT aexp
+    (19) bexp -> . aexp GT aexp
+    (20) bexp -> . aexp LE aexp
+    (21) bexp -> . aexp GE aexp
+    (22) bexp -> . NOT bexp
+    (23) bexp -> . bexp AND bexp
+    (24) bexp -> . bexp OR bexp
+    (25) aexp -> . INT
+    (26) aexp -> . ID
+    (27) aexp -> . aexp PLUS aexp
+    (28) aexp -> . aexp MINUS aexp
+    (29) aexp -> . aexp TIMES aexp
+    (30) aexp -> . aexp DIVIDE aexp
+    (31) aexp -> . MINUS exp
+
+    BOOL            shift and go to state 19
+    NOT             shift and go to state 20
+    INT             shift and go to state 16
+    ID              shift and go to state 17
+    MINUS           shift and go to state 18
+
+    bexp                           shift and go to state 44
+    aexp                           shift and go to state 42
+
+state 23
+
+    (11) block -> { } .
+
+    ID              reduce using rule 11 (block -> { } .)
+    GET             reduce using rule 11 (block -> { } .)
+    PUT             reduce using rule 11 (block -> { } .)
+    IF              reduce using rule 11 (block -> { } .)
+    WHILE           reduce using rule 11 (block -> { } .)
+    {               reduce using rule 11 (block -> { } .)
+    $end            reduce using rule 11 (block -> { } .)
+    }               reduce using rule 11 (block -> { } .)
+    ELSE            reduce using rule 11 (block -> { } .)
+    END             reduce using rule 11 (block -> { } .)
+
+
+state 24
+
+    (12) block -> { stmt . }
+    (4) stmt -> stmt . stmt
+    (2) stmt -> . block
+    (3) stmt -> . ID ASSIGN aexp ;
+    (4) stmt -> . stmt stmt
+    (5) stmt -> . GET ID ;
+    (6) stmt -> . PUT exp ;
+    (7) stmt -> . IF ( bexp ) THEN block opt_else END
+    (8) stmt -> . WHILE ( bexp ) DO block END
+    (11) block -> . { }
+    (12) block -> . { stmt }
+
+    }               shift and go to state 45
+    ID              shift and go to state 4
+    GET             shift and go to state 5
+    PUT             shift and go to state 6
+    IF              shift and go to state 7
+    WHILE           shift and go to state 8
+    {               shift and go to state 9
+
+    stmt                           shift and go to state 10
+    block                          shift and go to state 3
+
+state 25
+
+    (3) stmt -> ID ASSIGN aexp . ;
+    (27) aexp -> aexp . PLUS aexp
+    (28) aexp -> aexp . MINUS aexp
+    (29) aexp -> aexp . TIMES aexp
+    (30) aexp -> aexp . DIVIDE aexp
+
+    ;               shift and go to state 46
+    PLUS            shift and go to state 28
+    MINUS           shift and go to state 29
+    TIMES           shift and go to state 30
+    DIVIDE          shift and go to state 31
+
+
+state 26
+
+    (5) stmt -> GET ID ; .
+
+    ID              reduce using rule 5 (stmt -> GET ID ; .)
+    GET             reduce using rule 5 (stmt -> GET ID ; .)
+    PUT             reduce using rule 5 (stmt -> GET ID ; .)
+    IF              reduce using rule 5 (stmt -> GET ID ; .)
+    WHILE           reduce using rule 5 (stmt -> GET ID ; .)
+    {               reduce using rule 5 (stmt -> GET ID ; .)
+    $end            reduce using rule 5 (stmt -> GET ID ; .)
+    }               reduce using rule 5 (stmt -> GET ID ; .)
+
+
+state 27
+
+    (6) stmt -> PUT exp ; .
+
+    ID              reduce using rule 6 (stmt -> PUT exp ; .)
+    GET             reduce using rule 6 (stmt -> PUT exp ; .)
+    PUT             reduce using rule 6 (stmt -> PUT exp ; .)
+    IF              reduce using rule 6 (stmt -> PUT exp ; .)
+    WHILE           reduce using rule 6 (stmt -> PUT exp ; .)
+    {               reduce using rule 6 (stmt -> PUT exp ; .)
+    $end            reduce using rule 6 (stmt -> PUT exp ; .)
+    }               reduce using rule 6 (stmt -> PUT exp ; .)
+
+
+state 28
+
+    (27) aexp -> aexp PLUS . aexp
+    (25) aexp -> . INT
+    (26) aexp -> . ID
+    (27) aexp -> . aexp PLUS aexp
+    (28) aexp -> . aexp MINUS aexp
+    (29) aexp -> . aexp TIMES aexp
+    (30) aexp -> . aexp DIVIDE aexp
+    (31) aexp -> . MINUS exp
+
+    INT             shift and go to state 16
+    ID              shift and go to state 17
+    MINUS           shift and go to state 18
+
+    aexp                           shift and go to state 47
+
+state 29
+
+    (28) aexp -> aexp MINUS . aexp
+    (25) aexp -> . INT
+    (26) aexp -> . ID
+    (27) aexp -> . aexp PLUS aexp
+    (28) aexp -> . aexp MINUS aexp
+    (29) aexp -> . aexp TIMES aexp
+    (30) aexp -> . aexp DIVIDE aexp
+    (31) aexp -> . MINUS exp
+
+    INT             shift and go to state 16
+    ID              shift and go to state 17
+    MINUS           shift and go to state 18
+
+    aexp                           shift and go to state 48
+
+state 30
+
+    (29) aexp -> aexp TIMES . aexp
+    (25) aexp -> . INT
+    (26) aexp -> . ID
+    (27) aexp -> . aexp PLUS aexp
+    (28) aexp -> . aexp MINUS aexp
+    (29) aexp -> . aexp TIMES aexp
+    (30) aexp -> . aexp DIVIDE aexp
+    (31) aexp -> . MINUS exp
+
+    INT             shift and go to state 16
+    ID              shift and go to state 17
+    MINUS           shift and go to state 18
+
+    aexp                           shift and go to state 49
+
+state 31
+
+    (30) aexp -> aexp DIVIDE . aexp
+    (25) aexp -> . INT
+    (26) aexp -> . ID
+    (27) aexp -> . aexp PLUS aexp
+    (28) aexp -> . aexp MINUS aexp
+    (29) aexp -> . aexp TIMES aexp
+    (30) aexp -> . aexp DIVIDE aexp
+    (31) aexp -> . MINUS exp
+
+    INT             shift and go to state 16
+    ID              shift and go to state 17
+    MINUS           shift and go to state 18
+
+    aexp                           shift and go to state 50
+
+state 32
+
+    (16) bexp -> aexp EQ . aexp
+    (25) aexp -> . INT
+    (26) aexp -> . ID
+    (27) aexp -> . aexp PLUS aexp
+    (28) aexp -> . aexp MINUS aexp
+    (29) aexp -> . aexp TIMES aexp
+    (30) aexp -> . aexp DIVIDE aexp
+    (31) aexp -> . MINUS exp
+
+    INT             shift and go to state 16
+    ID              shift and go to state 17
+    MINUS           shift and go to state 18
+
+    aexp                           shift and go to state 51
+
+state 33
+
+    (17) bexp -> aexp NE . aexp
+    (25) aexp -> . INT
+    (26) aexp -> . ID
+    (27) aexp -> . aexp PLUS aexp
+    (28) aexp -> . aexp MINUS aexp
+    (29) aexp -> . aexp TIMES aexp
+    (30) aexp -> . aexp DIVIDE aexp
+    (31) aexp -> . MINUS exp
+
+    INT             shift and go to state 16
+    ID              shift and go to state 17
+    MINUS           shift and go to state 18
+
+    aexp                           shift and go to state 52
+
+state 34
+
+    (18) bexp -> aexp LT . aexp
+    (25) aexp -> . INT
+    (26) aexp -> . ID
+    (27) aexp -> . aexp PLUS aexp
+    (28) aexp -> . aexp MINUS aexp
+    (29) aexp -> . aexp TIMES aexp
+    (30) aexp -> . aexp DIVIDE aexp
+    (31) aexp -> . MINUS exp
+
+    INT             shift and go to state 16
+    ID              shift and go to state 17
+    MINUS           shift and go to state 18
+
+    aexp                           shift and go to state 53
+
+state 35
+
+    (19) bexp -> aexp GT . aexp
+    (25) aexp -> . INT
+    (26) aexp -> . ID
+    (27) aexp -> . aexp PLUS aexp
+    (28) aexp -> . aexp MINUS aexp
+    (29) aexp -> . aexp TIMES aexp
+    (30) aexp -> . aexp DIVIDE aexp
+    (31) aexp -> . MINUS exp
+
+    INT             shift and go to state 16
+    ID              shift and go to state 17
+    MINUS           shift and go to state 18
+
+    aexp                           shift and go to state 54
+
+state 36
+
+    (20) bexp -> aexp LE . aexp
+    (25) aexp -> . INT
+    (26) aexp -> . ID
+    (27) aexp -> . aexp PLUS aexp
+    (28) aexp -> . aexp MINUS aexp
+    (29) aexp -> . aexp TIMES aexp
+    (30) aexp -> . aexp DIVIDE aexp
+    (31) aexp -> . MINUS exp
+
+    INT             shift and go to state 16
+    ID              shift and go to state 17
+    MINUS           shift and go to state 18
+
+    aexp                           shift and go to state 55
+
+state 37
+
+    (21) bexp -> aexp GE . aexp
+    (25) aexp -> . INT
+    (26) aexp -> . ID
+    (27) aexp -> . aexp PLUS aexp
+    (28) aexp -> . aexp MINUS aexp
+    (29) aexp -> . aexp TIMES aexp
+    (30) aexp -> . aexp DIVIDE aexp
+    (31) aexp -> . MINUS exp
+
+    INT             shift and go to state 16
+    ID              shift and go to state 17
+    MINUS           shift and go to state 18
+
+    aexp                           shift and go to state 56
+
+state 38
+
+    (23) bexp -> bexp AND . bexp
+    (15) bexp -> . BOOL
+    (16) bexp -> . aexp EQ aexp
+    (17) bexp -> . aexp NE aexp
+    (18) bexp -> . aexp LT aexp
+    (19) bexp -> . aexp GT aexp
+    (20) bexp -> . aexp LE aexp
+    (21) bexp -> . aexp GE aexp
+    (22) bexp -> . NOT bexp
+    (23) bexp -> . bexp AND bexp
+    (24) bexp -> . bexp OR bexp
+    (25) aexp -> . INT
+    (26) aexp -> . ID
+    (27) aexp -> . aexp PLUS aexp
+    (28) aexp -> . aexp MINUS aexp
+    (29) aexp -> . aexp TIMES aexp
+    (30) aexp -> . aexp DIVIDE aexp
+    (31) aexp -> . MINUS exp
+
+    BOOL            shift and go to state 19
+    NOT             shift and go to state 20
+    INT             shift and go to state 16
+    ID              shift and go to state 17
+    MINUS           shift and go to state 18
+
+    bexp                           shift and go to state 57
+    aexp                           shift and go to state 42
+
+state 39
+
+    (24) bexp -> bexp OR . bexp
+    (15) bexp -> . BOOL
+    (16) bexp -> . aexp EQ aexp
+    (17) bexp -> . aexp NE aexp
+    (18) bexp -> . aexp LT aexp
+    (19) bexp -> . aexp GT aexp
+    (20) bexp -> . aexp LE aexp
+    (21) bexp -> . aexp GE aexp
+    (22) bexp -> . NOT bexp
+    (23) bexp -> . bexp AND bexp
+    (24) bexp -> . bexp OR bexp
+    (25) aexp -> . INT
+    (26) aexp -> . ID
+    (27) aexp -> . aexp PLUS aexp
+    (28) aexp -> . aexp MINUS aexp
+    (29) aexp -> . aexp TIMES aexp
+    (30) aexp -> . aexp DIVIDE aexp
+    (31) aexp -> . MINUS exp
+
+    BOOL            shift and go to state 19
+    NOT             shift and go to state 20
+    INT             shift and go to state 16
+    ID              shift and go to state 17
+    MINUS           shift and go to state 18
+
+    bexp                           shift and go to state 58
+    aexp                           shift and go to state 42
+
+state 40
+
+    (31) aexp -> MINUS exp .
+
+    PLUS            reduce using rule 31 (aexp -> MINUS exp .)
+    MINUS           reduce using rule 31 (aexp -> MINUS exp .)
+    TIMES           reduce using rule 31 (aexp -> MINUS exp .)
+    DIVIDE          reduce using rule 31 (aexp -> MINUS exp .)
+    EQ              reduce using rule 31 (aexp -> MINUS exp .)
+    NE              reduce using rule 31 (aexp -> MINUS exp .)
+    LT              reduce using rule 31 (aexp -> MINUS exp .)
+    GT              reduce using rule 31 (aexp -> MINUS exp .)
+    LE              reduce using rule 31 (aexp -> MINUS exp .)
+    GE              reduce using rule 31 (aexp -> MINUS exp .)
+    ;               reduce using rule 31 (aexp -> MINUS exp .)
+    AND             reduce using rule 31 (aexp -> MINUS exp .)
+    OR              reduce using rule 31 (aexp -> MINUS exp .)
+    )               reduce using rule 31 (aexp -> MINUS exp .)
+
+
+state 41
+
+    (22) bexp -> NOT bexp .
+    (23) bexp -> bexp . AND bexp
+    (24) bexp -> bexp . OR bexp
+
+    AND             reduce using rule 22 (bexp -> NOT bexp .)
+    OR              reduce using rule 22 (bexp -> NOT bexp .)
+    ;               reduce using rule 22 (bexp -> NOT bexp .)
+    PLUS            reduce using rule 22 (bexp -> NOT bexp .)
+    MINUS           reduce using rule 22 (bexp -> NOT bexp .)
+    TIMES           reduce using rule 22 (bexp -> NOT bexp .)
+    DIVIDE          reduce using rule 22 (bexp -> NOT bexp .)
+    EQ              reduce using rule 22 (bexp -> NOT bexp .)
+    NE              reduce using rule 22 (bexp -> NOT bexp .)
+    LT              reduce using rule 22 (bexp -> NOT bexp .)
+    GT              reduce using rule 22 (bexp -> NOT bexp .)
+    LE              reduce using rule 22 (bexp -> NOT bexp .)
+    GE              reduce using rule 22 (bexp -> NOT bexp .)
+    )               reduce using rule 22 (bexp -> NOT bexp .)
+
+  ! AND             [ shift and go to state 38 ]
+  ! OR              [ shift and go to state 39 ]
+
+
+state 42
+
+    (16) bexp -> aexp . EQ aexp
+    (17) bexp -> aexp . NE aexp
+    (18) bexp -> aexp . LT aexp
+    (19) bexp -> aexp . GT aexp
+    (20) bexp -> aexp . LE aexp
+    (21) bexp -> aexp . GE aexp
+    (27) aexp -> aexp . PLUS aexp
+    (28) aexp -> aexp . MINUS aexp
+    (29) aexp -> aexp . TIMES aexp
+    (30) aexp -> aexp . DIVIDE aexp
+
+    EQ              shift and go to state 32
+    NE              shift and go to state 33
+    LT              shift and go to state 34
+    GT              shift and go to state 35
+    LE              shift and go to state 36
+    GE              shift and go to state 37
+    PLUS            shift and go to state 28
+    MINUS           shift and go to state 29
+    TIMES           shift and go to state 30
+    DIVIDE          shift and go to state 31
+
+
+state 43
+
+    (7) stmt -> IF ( bexp . ) THEN block opt_else END
+    (23) bexp -> bexp . AND bexp
+    (24) bexp -> bexp . OR bexp
+
+    )               shift and go to state 59
+    AND             shift and go to state 38
+    OR              shift and go to state 39
+
+
+state 44
+
+    (8) stmt -> WHILE ( bexp . ) DO block END
+    (23) bexp -> bexp . AND bexp
+    (24) bexp -> bexp . OR bexp
+
+    )               shift and go to state 60
+    AND             shift and go to state 38
+    OR              shift and go to state 39
+
+
+state 45
+
+    (12) block -> { stmt } .
+
+    ID              reduce using rule 12 (block -> { stmt } .)
+    GET             reduce using rule 12 (block -> { stmt } .)
+    PUT             reduce using rule 12 (block -> { stmt } .)
+    IF              reduce using rule 12 (block -> { stmt } .)
+    WHILE           reduce using rule 12 (block -> { stmt } .)
+    {               reduce using rule 12 (block -> { stmt } .)
+    $end            reduce using rule 12 (block -> { stmt } .)
+    }               reduce using rule 12 (block -> { stmt } .)
+    ELSE            reduce using rule 12 (block -> { stmt } .)
+    END             reduce using rule 12 (block -> { stmt } .)
+
+
+state 46
+
+    (3) stmt -> ID ASSIGN aexp ; .
+
+    ID              reduce using rule 3 (stmt -> ID ASSIGN aexp ; .)
+    GET             reduce using rule 3 (stmt -> ID ASSIGN aexp ; .)
+    PUT             reduce using rule 3 (stmt -> ID ASSIGN aexp ; .)
+    IF              reduce using rule 3 (stmt -> ID ASSIGN aexp ; .)
+    WHILE           reduce using rule 3 (stmt -> ID ASSIGN aexp ; .)
+    {               reduce using rule 3 (stmt -> ID ASSIGN aexp ; .)
+    $end            reduce using rule 3 (stmt -> ID ASSIGN aexp ; .)
+    }               reduce using rule 3 (stmt -> ID ASSIGN aexp ; .)
+
+
+state 47
+
+    (27) aexp -> aexp PLUS aexp .
+    (27) aexp -> aexp . PLUS aexp
+    (28) aexp -> aexp . MINUS aexp
+    (29) aexp -> aexp . TIMES aexp
+    (30) aexp -> aexp . DIVIDE aexp
+
+    PLUS            reduce using rule 27 (aexp -> aexp PLUS aexp .)
+    MINUS           reduce using rule 27 (aexp -> aexp PLUS aexp .)
+    EQ              reduce using rule 27 (aexp -> aexp PLUS aexp .)
+    NE              reduce using rule 27 (aexp -> aexp PLUS aexp .)
+    LT              reduce using rule 27 (aexp -> aexp PLUS aexp .)
+    GT              reduce using rule 27 (aexp -> aexp PLUS aexp .)
+    LE              reduce using rule 27 (aexp -> aexp PLUS aexp .)
+    GE              reduce using rule 27 (aexp -> aexp PLUS aexp .)
+    ;               reduce using rule 27 (aexp -> aexp PLUS aexp .)
+    AND             reduce using rule 27 (aexp -> aexp PLUS aexp .)
+    OR              reduce using rule 27 (aexp -> aexp PLUS aexp .)
+    )               reduce using rule 27 (aexp -> aexp PLUS aexp .)
+    TIMES           shift and go to state 30
+    DIVIDE          shift and go to state 31
+
+  ! TIMES           [ reduce using rule 27 (aexp -> aexp PLUS aexp .) ]
+  ! DIVIDE          [ reduce using rule 27 (aexp -> aexp PLUS aexp .) ]
+  ! PLUS            [ shift and go to state 28 ]
+  ! MINUS           [ shift and go to state 29 ]
+
+
+state 48
+
+    (28) aexp -> aexp MINUS aexp .
+    (27) aexp -> aexp . PLUS aexp
+    (28) aexp -> aexp . MINUS aexp
+    (29) aexp -> aexp . TIMES aexp
+    (30) aexp -> aexp . DIVIDE aexp
+
+    PLUS            reduce using rule 28 (aexp -> aexp MINUS aexp .)
+    MINUS           reduce using rule 28 (aexp -> aexp MINUS aexp .)
+    EQ              reduce using rule 28 (aexp -> aexp MINUS aexp .)
+    NE              reduce using rule 28 (aexp -> aexp MINUS aexp .)
+    LT              reduce using rule 28 (aexp -> aexp MINUS aexp .)
+    GT              reduce using rule 28 (aexp -> aexp MINUS aexp .)
+    LE              reduce using rule 28 (aexp -> aexp MINUS aexp .)
+    GE              reduce using rule 28 (aexp -> aexp MINUS aexp .)
+    ;               reduce using rule 28 (aexp -> aexp MINUS aexp .)
+    AND             reduce using rule 28 (aexp -> aexp MINUS aexp .)
+    OR              reduce using rule 28 (aexp -> aexp MINUS aexp .)
+    )               reduce using rule 28 (aexp -> aexp MINUS aexp .)
+    TIMES           shift and go to state 30
+    DIVIDE          shift and go to state 31
+
+  ! TIMES           [ reduce using rule 28 (aexp -> aexp MINUS aexp .) ]
+  ! DIVIDE          [ reduce using rule 28 (aexp -> aexp MINUS aexp .) ]
+  ! PLUS            [ shift and go to state 28 ]
+  ! MINUS           [ shift and go to state 29 ]
+
+
+state 49
+
+    (29) aexp -> aexp TIMES aexp .
+    (27) aexp -> aexp . PLUS aexp
+    (28) aexp -> aexp . MINUS aexp
+    (29) aexp -> aexp . TIMES aexp
+    (30) aexp -> aexp . DIVIDE aexp
+
+    PLUS            reduce using rule 29 (aexp -> aexp TIMES aexp .)
+    MINUS           reduce using rule 29 (aexp -> aexp TIMES aexp .)
+    TIMES           reduce using rule 29 (aexp -> aexp TIMES aexp .)
+    DIVIDE          reduce using rule 29 (aexp -> aexp TIMES aexp .)
+    EQ              reduce using rule 29 (aexp -> aexp TIMES aexp .)
+    NE              reduce using rule 29 (aexp -> aexp TIMES aexp .)
+    LT              reduce using rule 29 (aexp -> aexp TIMES aexp .)
+    GT              reduce using rule 29 (aexp -> aexp TIMES aexp .)
+    LE              reduce using rule 29 (aexp -> aexp TIMES aexp .)
+    GE              reduce using rule 29 (aexp -> aexp TIMES aexp .)
+    ;               reduce using rule 29 (aexp -> aexp TIMES aexp .)
+    AND             reduce using rule 29 (aexp -> aexp TIMES aexp .)
+    OR              reduce using rule 29 (aexp -> aexp TIMES aexp .)
+    )               reduce using rule 29 (aexp -> aexp TIMES aexp .)
+
+  ! PLUS            [ shift and go to state 28 ]
+  ! MINUS           [ shift and go to state 29 ]
+  ! TIMES           [ shift and go to state 30 ]
+  ! DIVIDE          [ shift and go to state 31 ]
+
+
+state 50
+
+    (30) aexp -> aexp DIVIDE aexp .
+    (27) aexp -> aexp . PLUS aexp
+    (28) aexp -> aexp . MINUS aexp
+    (29) aexp -> aexp . TIMES aexp
+    (30) aexp -> aexp . DIVIDE aexp
+
+    PLUS            reduce using rule 30 (aexp -> aexp DIVIDE aexp .)
+    MINUS           reduce using rule 30 (aexp -> aexp DIVIDE aexp .)
+    TIMES           reduce using rule 30 (aexp -> aexp DIVIDE aexp .)
+    DIVIDE          reduce using rule 30 (aexp -> aexp DIVIDE aexp .)
+    EQ              reduce using rule 30 (aexp -> aexp DIVIDE aexp .)
+    NE              reduce using rule 30 (aexp -> aexp DIVIDE aexp .)
+    LT              reduce using rule 30 (aexp -> aexp DIVIDE aexp .)
+    GT              reduce using rule 30 (aexp -> aexp DIVIDE aexp .)
+    LE              reduce using rule 30 (aexp -> aexp DIVIDE aexp .)
+    GE              reduce using rule 30 (aexp -> aexp DIVIDE aexp .)
+    ;               reduce using rule 30 (aexp -> aexp DIVIDE aexp .)
+    AND             reduce using rule 30 (aexp -> aexp DIVIDE aexp .)
+    OR              reduce using rule 30 (aexp -> aexp DIVIDE aexp .)
+    )               reduce using rule 30 (aexp -> aexp DIVIDE aexp .)
+
+  ! PLUS            [ shift and go to state 28 ]
+  ! MINUS           [ shift and go to state 29 ]
+  ! TIMES           [ shift and go to state 30 ]
+  ! DIVIDE          [ shift and go to state 31 ]
+
+
+state 51
+
+    (16) bexp -> aexp EQ aexp .
+    (27) aexp -> aexp . PLUS aexp
+    (28) aexp -> aexp . MINUS aexp
+    (29) aexp -> aexp . TIMES aexp
+    (30) aexp -> aexp . DIVIDE aexp
+
+    AND             reduce using rule 16 (bexp -> aexp EQ aexp .)
+    OR              reduce using rule 16 (bexp -> aexp EQ aexp .)
+    ;               reduce using rule 16 (bexp -> aexp EQ aexp .)
+    EQ              reduce using rule 16 (bexp -> aexp EQ aexp .)
+    NE              reduce using rule 16 (bexp -> aexp EQ aexp .)
+    LT              reduce using rule 16 (bexp -> aexp EQ aexp .)
+    GT              reduce using rule 16 (bexp -> aexp EQ aexp .)
+    LE              reduce using rule 16 (bexp -> aexp EQ aexp .)
+    GE              reduce using rule 16 (bexp -> aexp EQ aexp .)
+    )               reduce using rule 16 (bexp -> aexp EQ aexp .)
+    PLUS            shift and go to state 28
+    MINUS           shift and go to state 29
+    TIMES           shift and go to state 30
+    DIVIDE          shift and go to state 31
+
+  ! PLUS            [ reduce using rule 16 (bexp -> aexp EQ aexp .) ]
+  ! MINUS           [ reduce using rule 16 (bexp -> aexp EQ aexp .) ]
+  ! TIMES           [ reduce using rule 16 (bexp -> aexp EQ aexp .) ]
+  ! DIVIDE          [ reduce using rule 16 (bexp -> aexp EQ aexp .) ]
+
+
+state 52
+
+    (17) bexp -> aexp NE aexp .
+    (27) aexp -> aexp . PLUS aexp
+    (28) aexp -> aexp . MINUS aexp
+    (29) aexp -> aexp . TIMES aexp
+    (30) aexp -> aexp . DIVIDE aexp
+
+    AND             reduce using rule 17 (bexp -> aexp NE aexp .)
+    OR              reduce using rule 17 (bexp -> aexp NE aexp .)
+    ;               reduce using rule 17 (bexp -> aexp NE aexp .)
+    EQ              reduce using rule 17 (bexp -> aexp NE aexp .)
+    NE              reduce using rule 17 (bexp -> aexp NE aexp .)
+    LT              reduce using rule 17 (bexp -> aexp NE aexp .)
+    GT              reduce using rule 17 (bexp -> aexp NE aexp .)
+    LE              reduce using rule 17 (bexp -> aexp NE aexp .)
+    GE              reduce using rule 17 (bexp -> aexp NE aexp .)
+    )               reduce using rule 17 (bexp -> aexp NE aexp .)
+    PLUS            shift and go to state 28
+    MINUS           shift and go to state 29
+    TIMES           shift and go to state 30
+    DIVIDE          shift and go to state 31
+
+  ! PLUS            [ reduce using rule 17 (bexp -> aexp NE aexp .) ]
+  ! MINUS           [ reduce using rule 17 (bexp -> aexp NE aexp .) ]
+  ! TIMES           [ reduce using rule 17 (bexp -> aexp NE aexp .) ]
+  ! DIVIDE          [ reduce using rule 17 (bexp -> aexp NE aexp .) ]
+
+
+state 53
+
+    (18) bexp -> aexp LT aexp .
+    (27) aexp -> aexp . PLUS aexp
+    (28) aexp -> aexp . MINUS aexp
+    (29) aexp -> aexp . TIMES aexp
+    (30) aexp -> aexp . DIVIDE aexp
+
+    AND             reduce using rule 18 (bexp -> aexp LT aexp .)
+    OR              reduce using rule 18 (bexp -> aexp LT aexp .)
+    ;               reduce using rule 18 (bexp -> aexp LT aexp .)
+    EQ              reduce using rule 18 (bexp -> aexp LT aexp .)
+    NE              reduce using rule 18 (bexp -> aexp LT aexp .)
+    LT              reduce using rule 18 (bexp -> aexp LT aexp .)
+    GT              reduce using rule 18 (bexp -> aexp LT aexp .)
+    LE              reduce using rule 18 (bexp -> aexp LT aexp .)
+    GE              reduce using rule 18 (bexp -> aexp LT aexp .)
+    )               reduce using rule 18 (bexp -> aexp LT aexp .)
+    PLUS            shift and go to state 28
+    MINUS           shift and go to state 29
+    TIMES           shift and go to state 30
+    DIVIDE          shift and go to state 31
+
+  ! PLUS            [ reduce using rule 18 (bexp -> aexp LT aexp .) ]
+  ! MINUS           [ reduce using rule 18 (bexp -> aexp LT aexp .) ]
+  ! TIMES           [ reduce using rule 18 (bexp -> aexp LT aexp .) ]
+  ! DIVIDE          [ reduce using rule 18 (bexp -> aexp LT aexp .) ]
+
+
+state 54
+
+    (19) bexp -> aexp GT aexp .
+    (27) aexp -> aexp . PLUS aexp
+    (28) aexp -> aexp . MINUS aexp
+    (29) aexp -> aexp . TIMES aexp
+    (30) aexp -> aexp . DIVIDE aexp
+
+    AND             reduce using rule 19 (bexp -> aexp GT aexp .)
+    OR              reduce using rule 19 (bexp -> aexp GT aexp .)
+    ;               reduce using rule 19 (bexp -> aexp GT aexp .)
+    EQ              reduce using rule 19 (bexp -> aexp GT aexp .)
+    NE              reduce using rule 19 (bexp -> aexp GT aexp .)
+    LT              reduce using rule 19 (bexp -> aexp GT aexp .)
+    GT              reduce using rule 19 (bexp -> aexp GT aexp .)
+    LE              reduce using rule 19 (bexp -> aexp GT aexp .)
+    GE              reduce using rule 19 (bexp -> aexp GT aexp .)
+    )               reduce using rule 19 (bexp -> aexp GT aexp .)
+    PLUS            shift and go to state 28
+    MINUS           shift and go to state 29
+    TIMES           shift and go to state 30
+    DIVIDE          shift and go to state 31
+
+  ! PLUS            [ reduce using rule 19 (bexp -> aexp GT aexp .) ]
+  ! MINUS           [ reduce using rule 19 (bexp -> aexp GT aexp .) ]
+  ! TIMES           [ reduce using rule 19 (bexp -> aexp GT aexp .) ]
+  ! DIVIDE          [ reduce using rule 19 (bexp -> aexp GT aexp .) ]
+
+
+state 55
+
+    (20) bexp -> aexp LE aexp .
+    (27) aexp -> aexp . PLUS aexp
+    (28) aexp -> aexp . MINUS aexp
+    (29) aexp -> aexp . TIMES aexp
+    (30) aexp -> aexp . DIVIDE aexp
+
+    AND             reduce using rule 20 (bexp -> aexp LE aexp .)
+    OR              reduce using rule 20 (bexp -> aexp LE aexp .)
+    ;               reduce using rule 20 (bexp -> aexp LE aexp .)
+    EQ              reduce using rule 20 (bexp -> aexp LE aexp .)
+    NE              reduce using rule 20 (bexp -> aexp LE aexp .)
+    LT              reduce using rule 20 (bexp -> aexp LE aexp .)
+    GT              reduce using rule 20 (bexp -> aexp LE aexp .)
+    LE              reduce using rule 20 (bexp -> aexp LE aexp .)
+    GE              reduce using rule 20 (bexp -> aexp LE aexp .)
+    )               reduce using rule 20 (bexp -> aexp LE aexp .)
+    PLUS            shift and go to state 28
+    MINUS           shift and go to state 29
+    TIMES           shift and go to state 30
+    DIVIDE          shift and go to state 31
+
+  ! PLUS            [ reduce using rule 20 (bexp -> aexp LE aexp .) ]
+  ! MINUS           [ reduce using rule 20 (bexp -> aexp LE aexp .) ]
+  ! TIMES           [ reduce using rule 20 (bexp -> aexp LE aexp .) ]
+  ! DIVIDE          [ reduce using rule 20 (bexp -> aexp LE aexp .) ]
+
+
+state 56
+
+    (21) bexp -> aexp GE aexp .
+    (27) aexp -> aexp . PLUS aexp
+    (28) aexp -> aexp . MINUS aexp
+    (29) aexp -> aexp . TIMES aexp
+    (30) aexp -> aexp . DIVIDE aexp
+
+    AND             reduce using rule 21 (bexp -> aexp GE aexp .)
+    OR              reduce using rule 21 (bexp -> aexp GE aexp .)
+    ;               reduce using rule 21 (bexp -> aexp GE aexp .)
+    EQ              reduce using rule 21 (bexp -> aexp GE aexp .)
+    NE              reduce using rule 21 (bexp -> aexp GE aexp .)
+    LT              reduce using rule 21 (bexp -> aexp GE aexp .)
+    GT              reduce using rule 21 (bexp -> aexp GE aexp .)
+    LE              reduce using rule 21 (bexp -> aexp GE aexp .)
+    GE              reduce using rule 21 (bexp -> aexp GE aexp .)
+    )               reduce using rule 21 (bexp -> aexp GE aexp .)
+    PLUS            shift and go to state 28
+    MINUS           shift and go to state 29
+    TIMES           shift and go to state 30
+    DIVIDE          shift and go to state 31
+
+  ! PLUS            [ reduce using rule 21 (bexp -> aexp GE aexp .) ]
+  ! MINUS           [ reduce using rule 21 (bexp -> aexp GE aexp .) ]
+  ! TIMES           [ reduce using rule 21 (bexp -> aexp GE aexp .) ]
+  ! DIVIDE          [ reduce using rule 21 (bexp -> aexp GE aexp .) ]
+
+
+state 57
+
+    (23) bexp -> bexp AND bexp .
+    (23) bexp -> bexp . AND bexp
+    (24) bexp -> bexp . OR bexp
+
+    AND             reduce using rule 23 (bexp -> bexp AND bexp .)
+    OR              reduce using rule 23 (bexp -> bexp AND bexp .)
+    ;               reduce using rule 23 (bexp -> bexp AND bexp .)
+    PLUS            reduce using rule 23 (bexp -> bexp AND bexp .)
+    MINUS           reduce using rule 23 (bexp -> bexp AND bexp .)
+    TIMES           reduce using rule 23 (bexp -> bexp AND bexp .)
+    DIVIDE          reduce using rule 23 (bexp -> bexp AND bexp .)
+    EQ              reduce using rule 23 (bexp -> bexp AND bexp .)
+    NE              reduce using rule 23 (bexp -> bexp AND bexp .)
+    LT              reduce using rule 23 (bexp -> bexp AND bexp .)
+    GT              reduce using rule 23 (bexp -> bexp AND bexp .)
+    LE              reduce using rule 23 (bexp -> bexp AND bexp .)
+    GE              reduce using rule 23 (bexp -> bexp AND bexp .)
+    )               reduce using rule 23 (bexp -> bexp AND bexp .)
+
+  ! AND             [ shift and go to state 38 ]
+  ! OR              [ shift and go to state 39 ]
+
+
+state 58
+
+    (24) bexp -> bexp OR bexp .
+    (23) bexp -> bexp . AND bexp
+    (24) bexp -> bexp . OR bexp
+
+    AND             reduce using rule 24 (bexp -> bexp OR bexp .)
+    OR              reduce using rule 24 (bexp -> bexp OR bexp .)
+    ;               reduce using rule 24 (bexp -> bexp OR bexp .)
+    PLUS            reduce using rule 24 (bexp -> bexp OR bexp .)
+    MINUS           reduce using rule 24 (bexp -> bexp OR bexp .)
+    TIMES           reduce using rule 24 (bexp -> bexp OR bexp .)
+    DIVIDE          reduce using rule 24 (bexp -> bexp OR bexp .)
+    EQ              reduce using rule 24 (bexp -> bexp OR bexp .)
+    NE              reduce using rule 24 (bexp -> bexp OR bexp .)
+    LT              reduce using rule 24 (bexp -> bexp OR bexp .)
+    GT              reduce using rule 24 (bexp -> bexp OR bexp .)
+    LE              reduce using rule 24 (bexp -> bexp OR bexp .)
+    GE              reduce using rule 24 (bexp -> bexp OR bexp .)
+    )               reduce using rule 24 (bexp -> bexp OR bexp .)
+
+  ! AND             [ shift and go to state 38 ]
+  ! OR              [ shift and go to state 39 ]
+
+
+state 59
+
+    (7) stmt -> IF ( bexp ) . THEN block opt_else END
+
+    THEN            shift and go to state 61
+
+
+state 60
+
+    (8) stmt -> WHILE ( bexp ) . DO block END
+
+    DO              shift and go to state 62
+
+
+state 61
+
+    (7) stmt -> IF ( bexp ) THEN . block opt_else END
+    (11) block -> . { }
+    (12) block -> . { stmt }
+
+    {               shift and go to state 9
+
+    block                          shift and go to state 63
+
+state 62
+
+    (8) stmt -> WHILE ( bexp ) DO . block END
+    (11) block -> . { }
+    (12) block -> . { stmt }
+
+    {               shift and go to state 9
+
+    block                          shift and go to state 64
+
+state 63
+
+    (7) stmt -> IF ( bexp ) THEN block . opt_else END
+    (9) opt_else -> . ELSE block
+    (10) opt_else -> . empty
+    (32) empty -> .
+
+    ELSE            shift and go to state 66
+    END             reduce using rule 32 (empty -> .)
+
+    opt_else                       shift and go to state 65
+    empty                          shift and go to state 67
+
+state 64
+
+    (8) stmt -> WHILE ( bexp ) DO block . END
+
+    END             shift and go to state 68
+
+
+state 65
+
+    (7) stmt -> IF ( bexp ) THEN block opt_else . END
+
+    END             shift and go to state 69
+
+
+state 66
+
+    (9) opt_else -> ELSE . block
+    (11) block -> . { }
+    (12) block -> . { stmt }
+
+    {               shift and go to state 9
+
+    block                          shift and go to state 70
+
+state 67
+
+    (10) opt_else -> empty .
+
+    END             reduce using rule 10 (opt_else -> empty .)
+
+
+state 68
+
+    (8) stmt -> WHILE ( bexp ) DO block END .
+
+    ID              reduce using rule 8 (stmt -> WHILE ( bexp ) DO block END .)
+    GET             reduce using rule 8 (stmt -> WHILE ( bexp ) DO block END .)
+    PUT             reduce using rule 8 (stmt -> WHILE ( bexp ) DO block END .)
+    IF              reduce using rule 8 (stmt -> WHILE ( bexp ) DO block END .)
+    WHILE           reduce using rule 8 (stmt -> WHILE ( bexp ) DO block END .)
+    {               reduce using rule 8 (stmt -> WHILE ( bexp ) DO block END .)
+    $end            reduce using rule 8 (stmt -> WHILE ( bexp ) DO block END .)
+    }               reduce using rule 8 (stmt -> WHILE ( bexp ) DO block END .)
+
+
+state 69
+
+    (7) stmt -> IF ( bexp ) THEN block opt_else END .
+
+    ID              reduce using rule 7 (stmt -> IF ( bexp ) THEN block opt_else END .)
+    GET             reduce using rule 7 (stmt -> IF ( bexp ) THEN block opt_else END .)
+    PUT             reduce using rule 7 (stmt -> IF ( bexp ) THEN block opt_else END .)
+    IF              reduce using rule 7 (stmt -> IF ( bexp ) THEN block opt_else END .)
+    WHILE           reduce using rule 7 (stmt -> IF ( bexp ) THEN block opt_else END .)
+    {               reduce using rule 7 (stmt -> IF ( bexp ) THEN block opt_else END .)
+    $end            reduce using rule 7 (stmt -> IF ( bexp ) THEN block opt_else END .)
+    }               reduce using rule 7 (stmt -> IF ( bexp ) THEN block opt_else END .)
+
+
+state 70
+
+    (9) opt_else -> ELSE block .
+
+    END             reduce using rule 9 (opt_else -> ELSE block .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for ID in state 10 resolved as shift
+WARNING: shift/reduce conflict for GET in state 10 resolved as shift
+WARNING: shift/reduce conflict for PUT in state 10 resolved as shift
+WARNING: shift/reduce conflict for IF in state 10 resolved as shift
+WARNING: shift/reduce conflict for WHILE in state 10 resolved as shift
+WARNING: shift/reduce conflict for { in state 10 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 14 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 14 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 14 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 14 resolved as shift
+WARNING: shift/reduce conflict for EQ in state 14 resolved as shift
+WARNING: shift/reduce conflict for NE in state 14 resolved as shift
+WARNING: shift/reduce conflict for LT in state 14 resolved as shift
+WARNING: shift/reduce conflict for GT in state 14 resolved as shift
+WARNING: shift/reduce conflict for LE in state 14 resolved as shift
+WARNING: shift/reduce conflict for GE in state 14 resolved as shift
+WARNING: shift/reduce conflict for AND in state 15 resolved as shift
+WARNING: shift/reduce conflict for OR in state 15 resolved as shift
