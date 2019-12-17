@@ -61,7 +61,7 @@ def put_stmt(node):
     assert_match(PUT, 'put')
     
     value = walk(exp)
-    print("> {}".format(value))
+    print("{}".format(value))
 
 
 def while_stmt(node):

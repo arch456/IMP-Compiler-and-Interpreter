@@ -8,7 +8,6 @@ from grammar_stuff import assert_match
 i = 0
 j = 0
     
-#########################################################################
 # node functions
 def seq(node):
 
@@ -28,7 +27,8 @@ def nil(node):
     (NIL,) = node
     assert_match(NIL, 'nil')
     
-    code = [('return',)]
+    code = []
+    #code = [('return',)]
     i = 0
     j = 0
     return code
@@ -66,7 +66,8 @@ def get_stmt(node):
     value = input()
     state.symbol_table[name] = value
     #code = [('input', name)]
-    code = [('invokevirtual',)]
+    code = [('invokevirtual        java/util/Scanner.nextInt()I' ,)]
+    
     code += [('istore_'+str(i),)]
     i+=1
     
@@ -81,7 +82,9 @@ def put_stmt(node):
     exp_code = walk(exp)
 
     #code = [('print', exp_code)]
-    code = [('invokevirtual',)]
+    #code = [('invokevirtual',)]
+    #code = [('invokevirtual java/io/PrintStream/println(Ljava/lang/String;)V\n
+    code = [('invokevirtual        java/io/PrintStream.println:(Ljava/lang/String;)V',)]
     
     return code
 
@@ -100,24 +103,13 @@ def while_stmt(node):
     
     code = [(begin_label + ':',)]
     code += cond_code
-    if cond[0] == '<':
-        code += [('if_icmpge\t'+false_label,)]
-    elif cond[0] == '>':
-        code += [('if_icmple\t'+false_label,)]
-    elif cond[0] == '>=':
-        code += [('if_icmplt\t'+false_label,)]
-    elif cond[0] == '<=':
-        code += [('if_icmpgt\t'+false_label,)]
-    elif cond[0] == '==':
-        code += [('if_icmpne\t'+false_label,)]
-    elif cond[0] == '!=':
-        code += [('if_icmpeq\t'+false_label,)]   
-        
+    code += cond_expr(cond[0],false_label)     
     
     code += [(true_label + ':',)]
     code += body_code
     code += [('goto\t'+begin_label,)]
     code += [(false_label + ':',)]
+    code += [('return',)]
         
     #code += [('jumpF', cond_code, bottom_label)]
     #code += body_code
@@ -140,31 +132,34 @@ def if_stmt(node):
         (IF, cond, s1, s2) = node
         assert_match(IF, 'if')
         
-        else_label = label()
-        end_label = label()
+        false_label = label()
         cond_code = walk(cond)
         stmt1_code = walk(s1)
         stmt2_code = walk(s2)
 
-        code = [('jumpF', cond_code, else_label)]
+        code = cond_expr(cond[0],false_label)
+        code += cond_code   
         code += stmt1_code
-        code += [('jump', end_label)]
-        code += [(else_label + ':',)]
+        code += [('return',)]
         code += stmt2_code
-        code += [(end_label + ':',)]
-        code += [('noop',)]
+        code += [(false_label + ':',)]
+        code += [('return',)]
 
         return code
 
     else:
-        end_label = label();
+        false_label = label();
         cond_code = walk(cond)
         stmt1_code = walk(s1)
-
-        code = [('jumpF', cond_code, end_label)]
+        
+        code = cond_expr(cond[0],false_label)
+        code += cond_code    
+        #code = [('jumpF', cond_code, end_label)]
         code += stmt1_code
-        code += [(end_label + ':',)]
-        code += [('noop',)]
+        code += [(false_label + ':',)]
+        code += [('return',)]
+        #code += [(end_label + ':',)]
+        #code += [('noop',)]
 
         return code
 
@@ -185,15 +180,16 @@ def binop_exp(node):
     (OP, c1, c2) = node
     if OP not in ['+', '-', '*', '/', '==', '<=', '<', '>', '!=', '>=']:
         raise ValueError("pattern match failed on " + OP)
+    code = []
     
     lcode = walk(c1)
     rcode = walk(c2)
-    print(lcode,rcode,c1,c2)
-    val1 = state.symbol_table.get(lcode, 0)
-    val2 = state.symbol_table.get(rcode, 0)
-    output = int(val1)+int(val2)  
+    #print(lcode,rcode,c1,c2)
+    #val1 = state.symbol_table.get(lcode, 0)
+    #val2 = state.symbol_table.get(rcode, 0)
+    #output = int(val1)+int(val2)  
     if OP == '+':
-        code = [('iload_'+str(j),)]
+        code += [('iload_'+str(j),)]
         j+=1
         code += [('iload_'+str(j),)]
         j+=1
@@ -202,7 +198,7 @@ def binop_exp(node):
         i+=1
         
     if OP == '-':
-        code = [('iload_'+str(j),)]
+        code += [('iload_'+str(j),)]
         j+=1
         code += [('iload_'+str(j),)]
         j+=1
@@ -211,7 +207,7 @@ def binop_exp(node):
         i+=1
         
     if OP == '*':
-        code = [('iload_'+str(j),)]
+        code += [('iload_'+str(j),)]
         j+=1
         code += [('iload_'+str(j),)]
         j+=1
@@ -220,24 +216,27 @@ def binop_exp(node):
         i+=1
         
     if OP == '/':
-        code = [('iload_'+str(j),)]
+        code += [('iload_'+str(j),)]
         j+=1
         code += [('iload_'+str(j),)]
         j+=1
         code += [('idiv',)]
         code += [('istore_'+str(i),)]
         i+=1
-        
+    
+    #print(c1,c2)
+    #print(OP)
     if OP in ['<','>','==', '<=', '!=', '>=']:
+        #print(c1[0],c2[0])
         if c1[0] == 'id':
-            code = [('iload_'+str(j),)]
+            code += [('iload_'+str(j),)]
             j+=1
-        elif c2[0] == 'id':
-            code = [('iload_'+str(j),)] 
+        if c2[0] == 'id':
+            code += [('iload_'+str(j),)] 
             j+=1
         if c1[0] == 'integer':
             code += [('iconst_'+lcode,)]
-        elif c2[0] == 'integer':
+        if c2[0] == 'integer':
             code += [('iconst_'+rcode,)]
         
                  
@@ -291,6 +290,24 @@ def paren_exp(node):
 
     return exp_code
 
+def cond_expr(op,flabel):
+    
+    code = []
+    if op == '==':
+        code += [('if_icmpne\t'+flabel,)]
+    elif op == '!=':
+        code += [('if_icmpeq\t'+flabel,)]
+    elif op == '<':
+        code += [('if_icmpge\t'+flabel,)]
+    elif op == '>':
+        code += [('if_icmple\t'+flabel,)]
+    elif op == '<=':
+        code += [('if_icmpgt\t'+flabel,)]
+    elif op == '>=':
+        code += [('if_icmplt\t'+flabel,)]
+        
+    return code
+
 #########################################################################
 # walk
 #########################################################################
@@ -325,7 +342,10 @@ dispatch_dict = {
     '/'       : binop_exp,
     '=='      : binop_exp,
     '<='      : binop_exp,
-    '<'       : binop_exp
+    '<'       : binop_exp,
+    '>'       : binop_exp,
+    '>='      : binop_exp,
+    '!='      : binop_exp
 
 }
 
