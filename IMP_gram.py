@@ -14,11 +14,13 @@ precedence = (('left', 'AND', 'OR'),
 # define the grammar for IMP language
 def p_grammar(_):
     '''
-    program : stmt
+    program : stmt_list
+    
+    stmt_list : stmt stmt_list
+              | empty
 
     stmt : block
          | ID ASSIGN aexp ';'
-         | stmt stmt  
          | GET ID ';'
          | PUT exp ';'      
          | IF '(' bexp ')' THEN block opt_else END
@@ -27,10 +29,11 @@ def p_grammar(_):
     opt_else : ELSE block
              | empty
              
-    block : '{' '}'
-          | '{' stmt '}'
+    block : '{' stmt_list '}'
+          | empty
           
-    exp : aexp
+    exp : '(' exp ')'
+        | aexp
         | bexp
         
     bexp : BOOL
@@ -50,7 +53,7 @@ def p_grammar(_):
          | aexp MINUS aexp
          | aexp TIMES aexp
          | aexp DIVIDE aexp
-         | MINUS exp %prec UMINUS
+         | MINUS aexp %prec UMINUS
 
     '''
     pass

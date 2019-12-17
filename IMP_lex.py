@@ -9,17 +9,14 @@ reserved = {
     'else'  : 'ELSE',
     'while' : 'WHILE',
     'then'  : 'THEN',
-    'not'   : 'NOT',
     'end'   : 'END' ,
     'do'    : 'DO'
 }
 
-literals = [';',':','=','(',')','{','}']
+literals = [';',':','=','(',')','{','}','!']
 
 tokens = [
-          'PLUS','MINUS','TIMES','DIVIDE',
-          'EQ','NE','LT','GT','LE','GE','AND','OR', 
-          'INT','ID','BOOL','ASSIGN'
+          'PLUS','MINUS','TIMES','DIVIDE','EQ','NE','LT','GT','LE','GE','AND','OR','NOT','INT','ID','BOOL','ASSIGN'
           ] + list(reserved.values())
 
 t_PLUS    = r'\+'
@@ -33,7 +30,8 @@ t_GT      = r'>'
 t_LE      = r'<='
 t_GE      = r'>='
 t_AND     = r'&&'
-t_OR      = r'\|\|'
+t_OR      = r'or'
+t_NOT     = r'\!'
 t_ASSIGN  = r':='
 
 t_ignore = ' \t'
