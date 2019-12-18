@@ -3,8 +3,8 @@
 from ply import lex
 
 reserved = {
-    'input'   : 'INPUT',
-    'print'   : 'PRINT',
+    'input' : 'INPUT',
+    'print' : 'PRINT',
     'if'    : 'IF',
     'else'  : 'ELSE',
     'while' : 'WHILE',

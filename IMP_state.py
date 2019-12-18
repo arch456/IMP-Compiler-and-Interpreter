@@ -3,10 +3,10 @@ class State:
         self.initialize()
 
     def initialize(self):
-        # symbol table to hold variable-value associations
+        # symbol table contains the values of each of the defined variables
         self.symbol_table = {}
 
-        # when done parsing this variable will hold our AST
+        # this variable will contains the AST generated after parsing is done
         self.AST = None
 
 state = State()
