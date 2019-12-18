@@ -40,10 +40,10 @@ def block_stmt(node):
     walk(stmt_list)    
     
 
-def get_stmt(node):
+def input_stmt(node):
 
-    (GET, name) = node
-    assert_match(GET, 'get')
+    (INPUT, name) = node
+    assert_match(INPUT, 'input')
 
     s = input("Value for " + name + '? ')
     
@@ -55,10 +55,10 @@ def get_stmt(node):
     state.symbol_table[name] = value
 
 
-def put_stmt(node):
+def print_stmt(node):
 
-    (PUT, exp) = node
-    assert_match(PUT, 'put')
+    (PRINT, exp) = node
+    assert_match(PRINT, 'print')
     
     value = walk(exp)
     print("{}".format(value))
@@ -164,29 +164,6 @@ def ge_exp(node):
     v2 = walk(c2)
     
     return 1 if v1 >= v2 else 0
-
-
-def and_exp(node):
-    
-    (AND,c1,c2) = node
-    assert_match(AND, '&&')
-    
-    v1 = walk(c1)
-    v2 = walk(c2)
-    
-    return 1 if v1 and v2 else 0
-
-
-def or_exp(node):
-    
-    (OR,c1,c2) = node
-    assert_match(OR, 'or')
-    
-    v1 = walk(c1)
-    v2 = walk(c2)
-    
-    return 1 if v1 or v2 else 0
-
 
 def not_bexp(node):
     
@@ -300,8 +277,8 @@ dispatch_dict = {
     'seq'     : seq,
     'nil'     : nil,
     'assign'  : assign_stmt,
-    'get'     : get_stmt,
-    'put'     : put_stmt,
+    'input'   : input_stmt,
+    'print'   : print_stmt,
     'while'   : while_stmt,
     'if'      : if_stmt,
     'block'   : block_stmt,
@@ -319,8 +296,6 @@ dispatch_dict = {
     '>'       : gt_exp,
     '<='      : le_exp,
     '>='      : ge_exp,
-    '&&'      : and_exp,
-    'or'      : or_exp,
     'uminus'  : uminus_exp,
     'not'     : not_bexp
 }

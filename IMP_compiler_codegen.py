@@ -58,13 +58,13 @@ def assign_stmt(node):
     return code
 
 #########################################################################
-def get_stmt(node):
+def input_stmt(node):
 
     global i
-    (GET, name) = node
-    assert_match(GET, 'get')
-    value = input()
-    state.symbol_table[name] = value
+    (INPUT, name) = node
+    assert_match(INPUT, 'input')
+    #value = input()
+    #state.symbol_table[name] = value
     #code = [('input', name)]
     code = [('invokevirtual        java/util/Scanner.nextInt()I' ,)]
     
@@ -74,10 +74,10 @@ def get_stmt(node):
     return code
 
 #########################################################################
-def put_stmt(node):
+def print_stmt(node):
 
-    (PUT, exp) = node
-    assert_match(PUT, 'put')
+    (PRINT, exp) = node
+    assert_match(PRINT, 'print')
     
     exp_code = walk(exp)
 
@@ -326,8 +326,8 @@ dispatch_dict = {
     'seq'     : seq,
     'nil'     : nil,
     'assign'  : assign_stmt,
-    'get'     : get_stmt,
-    'put'     : put_stmt,
+    'input'   : input_stmt,
+    'print'   : print_stmt,
     'while'   : while_stmt,
     'if'      : if_stmt,
     'block'   : block_stmt,

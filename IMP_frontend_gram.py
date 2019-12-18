@@ -5,8 +5,7 @@ from IMP_lex import tokens, lexer
 from IMP_state import state
 
 # define the precedence and associativity for the language here
-precedence = (('left', 'AND', 'OR'),
-              ('left', 'EQ', 'NE', 'LT', 'GT', 'LE', 'GE'),
+precedence = (('left', 'EQ', 'NE', 'LT', 'GT', 'LE', 'GE'),
               ('left', 'PLUS', 'MINUS'),
               ('left', 'TIMES', 'DIVIDE'),
               ('right', 'UMINUS', 'NOT')
@@ -33,18 +32,18 @@ def p_stmt_list(p):
 def p_stmt(p):
     '''
     stmt : block
-         | GET ID ';'
-         | PUT exp ';'      
+         | INPUT ID ';'
+         | PRINT exp ';'      
          | IF '(' bexp ')' THEN block opt_else END
          | WHILE '(' bexp ')' DO block END
     '''
     if (len(p) == 1):
         p[0] = p[1]
-    elif p[1] == 'get':
-        p[0] = ('get', p[2])
+    elif p[1] == 'input':
+        p[0] = ('input', p[2])
         state.symbol_table[p[2]] = None
-    elif p[1] == 'put':
-        p[0] = ('put', p[2])
+    elif p[1] == 'print':
+        p[0] = ('print', p[2])
     elif p[1] == 'if':
         p[0] = ('if', p[3], p[6], p[7])
     elif p[1] == 'while':
@@ -102,8 +101,6 @@ def p_bexp(p):
          | aexp GT aexp
          | aexp LE aexp
          | aexp GE aexp
-         | bexp AND bexp
-         | bexp OR bexp
     '''
     p[0] = (p[2], p[1], p[3])
         

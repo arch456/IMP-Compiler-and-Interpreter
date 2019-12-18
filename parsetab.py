@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = "leftANDORleftEQNELTGTLEGEleftPLUSMINUSleftTIMESDIVIDErightUMINUSNOTAND ASSIGN BOOL DIVIDE DO ELSE END EQ GE GET GT ID IF INT LE LT MINUS NE NOT OR PLUS PUT THEN TIMES WHILE\n    program : stmt_list\n    \n    stmt_list : stmt stmt_list\n              | empty\n\n    stmt : block\n         | ID ASSIGN aexp ';'\n         | GET ID ';'\n         | PUT exp ';'      \n         | IF '(' bexp ')' THEN block opt_else END\n         | WHILE '(' bexp ')' DO block END\n\n    opt_else : ELSE block\n             | empty\n             \n    block : '{' stmt_list '}'\n          | empty\n          \n    exp : '(' exp ')'\n        | aexp\n        | bexp\n        \n    bexp : BOOL\n         | aexp EQ aexp\n         | aexp NE aexp\n         | aexp LT aexp\n         | aexp GT aexp\n         | aexp LE aexp\n         | aexp GE aexp\n         | NOT bexp\n         | bexp AND bexp\n         | bexp OR bexp\n         \n    aexp : INT\n         | ID\n         | aexp PLUS aexp\n         | aexp MINUS aexp\n         | aexp TIMES aexp\n         | aexp DIVIDE aexp\n         | MINUS aexp %prec UMINUS\n\n    empty :"
+_lr_signature = "leftEQNELTGTLEGEleftPLUSMINUSleftTIMESDIVIDErightUMINUSNOTASSIGN BOOL DIVIDE DO ELSE END EQ GE GT ID IF INPUT INT LE LT MINUS NE NOT PLUS PRINT THEN TIMES WHILE\n    program : stmt_list\n    \n    stmt_list : stmt stmt_list\n              | empty\n\n    stmt : block\n         | ID ASSIGN aexp ';'\n         | INPUT ID ';'\n         | PRINT exp ';'      \n         | IF '(' bexp ')' THEN block opt_else END\n         | WHILE '(' bexp ')' DO block END\n\n    opt_else : ELSE block\n             | empty\n             \n    block : '{' stmt_list '}'\n          | empty\n          \n    exp : '(' exp ')'\n        | aexp\n        | bexp\n        \n    bexp : BOOL\n         | aexp EQ aexp\n         | aexp NE aexp\n         | aexp LT aexp\n         | aexp GT aexp\n         | aexp LE aexp\n         | aexp GE aexp\n         | NOT bexp\n         \n    aexp : INT\n         | ID\n         | aexp PLUS aexp\n         | aexp MINUS aexp\n         | aexp TIMES aexp\n         | aexp DIVIDE aexp\n         | MINUS aexp %prec UMINUS\n\n    empty :"
     
-_lr_action_items = {'ID':([0,3,4,5,7,8,11,13,16,21,23,24,25,28,29,31,32,33,34,35,36,37,38,39,40,41,42,48,49,73,74,],[6,6,-13,-4,14,20,6,20,20,20,20,20,20,-6,-7,20,20,20,20,20,20,20,20,20,20,20,20,-12,-5,-9,-8,]),'GET':([0,3,4,5,11,28,29,48,49,73,74,],[7,7,-13,-4,7,-6,-7,-12,-5,-9,-8,]),'PUT':([0,3,4,5,11,28,29,48,49,73,74,],[8,8,-13,-4,8,-6,-7,-12,-5,-9,-8,]),'IF':([0,3,4,5,11,28,29,48,49,73,74,],[9,9,-13,-4,9,-6,-7,-12,-5,-9,-8,]),'WHILE':([0,3,4,5,11,28,29,48,49,73,74,],[10,10,-13,-4,10,-6,-7,-12,-5,-9,-8,]),'$end':([0,1,2,3,4,5,12,28,29,48,49,73,74,],[-34,0,-1,-34,-3,-4,-2,-6,-7,-12,-5,-9,-8,]),'{':([0,3,4,5,11,28,29,48,49,65,66,71,73,74,],[11,11,-13,-4,11,-6,-7,-12,-5,11,11,11,-9,-8,]),'}':([3,4,5,11,12,26,28,29,48,49,73,74,],[-34,-3,-4,-34,-2,48,-6,-7,-12,-5,-9,-8,]),'ASSIGN':([6,],[13,]),'(':([8,9,10,16,],[16,24,25,16,]),'INT':([8,13,16,21,23,24,25,31,32,33,34,35,36,37,38,39,40,41,42,],[19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,]),'MINUS':([8,13,16,17,19,20,21,23,24,25,27,31,32,33,34,35,36,37,38,39,40,41,42,43,45,51,52,53,54,55,56,57,58,59,60,],[21,21,21,32,-27,-28,21,21,21,21,32,21,21,21,21,21,21,21,21,21,21,21,21,-33,32,-29,-30,-31,-32,32,32,32,32,32,32,]),'BOOL':([8,16,23,24,25,41,42,],[22,22,22,22,22,22,22,]),'NOT':([8,16,23,24,25,41,42,],[23,23,23,23,23,23,23,]),';':([14,15,17,18,19,20,22,27,43,44,50,51,52,53,54,55,56,57,58,59,60,61,62,],[28,29,-15,-16,-27,-28,-17,49,-33,-24,-14,-29,-30,-31,-32,-18,-19,-20,-21,-22,-23,-25,-26,]),')':([17,18,19,20,22,30,43,44,46,47,50,51,52,53,54,55,56,57,58,59,60,61,62,],[-15,-16,-27,-28,-17,50,-33,-24,63,64,-14,-29,-30,-31,-32,-18,-19,-20,-21,-22,-23,-25,-26,]),'PLUS':([17,19,20,27,43,45,51,52,53,54,55,56,57,58,59,60,],[31,-27,-28,31,-33,31,-29,-30,-31,-32,31,31,31,31,31,31,]),'TIMES':([17,19,20,27,43,45,51,52,53,54,55,56,57,58,59,60,],[33,-27,-28,33,-33,33,33,33,-31,-32,33,33,33,33,33,33,]),'DIVIDE':([17,19,20,27,43,45,51,52,53,54,55,56,57,58,59,60,],[34,-27,-28,34,-33,34,34,34,-31,-32,34,34,34,34,34,34,]),'EQ':([17,19,20,43,45,51,52,53,54,],[35,-27,-28,-33,35,-29,-30,-31,-32,]),'NE':([17,19,20,43,45,51,52,53,54,],[36,-27,-28,-33,36,-29,-30,-31,-32,]),'LT':([17,19,20,43,45,51,52,53,54,],[37,-27,-28,-33,37,-29,-30,-31,-32,]),'GT':([17,19,20,43,45,51,52,53,54,],[38,-27,-28,-33,38,-29,-30,-31,-32,]),'LE':([17,19,20,43,45,51,52,53,54,],[39,-27,-28,-33,39,-29,-30,-31,-32,]),'GE':([17,19,20,43,45,51,52,53,54,],[40,-27,-28,-33,40,-29,-30,-31,-32,]),'AND':([18,19,20,22,43,44,46,47,51,52,53,54,55,56,57,58,59,60,61,62,],[41,-27,-28,-17,-33,-24,41,41,-29,-30,-31,-32,-18,-19,-20,-21,-22,-23,-25,-26,]),'OR':([18,19,20,22,43,44,46,47,51,52,53,54,55,56,57,58,59,60,61,62,],[42,-27,-28,-17,-33,-24,42,42,-29,-30,-31,-32,-18,-19,-20,-21,-22,-23,-25,-26,]),'ELSE':([48,65,67,68,],[-12,-34,71,-13,]),'END':([48,65,66,67,68,69,70,71,72,75,],[-12,-34,-34,-34,-13,73,74,-34,-11,-10,]),'THEN':([63,],[65,]),'DO':([64,],[66,]),}
+_lr_action_items = {'ID':([0,3,4,5,7,8,11,13,16,21,23,24,25,28,29,31,32,33,34,35,36,37,38,39,40,46,47,69,70,],[6,6,-13,-4,14,20,6,20,20,20,20,20,20,-6,-7,20,20,20,20,20,20,20,20,20,20,-12,-5,-9,-8,]),'INPUT':([0,3,4,5,11,28,29,46,47,69,70,],[7,7,-13,-4,7,-6,-7,-12,-5,-9,-8,]),'PRINT':([0,3,4,5,11,28,29,46,47,69,70,],[8,8,-13,-4,8,-6,-7,-12,-5,-9,-8,]),'IF':([0,3,4,5,11,28,29,46,47,69,70,],[9,9,-13,-4,9,-6,-7,-12,-5,-9,-8,]),'WHILE':([0,3,4,5,11,28,29,46,47,69,70,],[10,10,-13,-4,10,-6,-7,-12,-5,-9,-8,]),'$end':([0,1,2,3,4,5,12,28,29,46,47,69,70,],[-32,0,-1,-32,-3,-4,-2,-6,-7,-12,-5,-9,-8,]),'{':([0,3,4,5,11,28,29,46,47,61,62,67,69,70,],[11,11,-13,-4,11,-6,-7,-12,-5,11,11,11,-9,-8,]),'}':([3,4,5,11,12,26,28,29,46,47,69,70,],[-32,-3,-4,-32,-2,46,-6,-7,-12,-5,-9,-8,]),'ASSIGN':([6,],[13,]),'(':([8,9,10,16,],[16,24,25,16,]),'INT':([8,13,16,21,23,24,25,31,32,33,34,35,36,37,38,39,40,],[19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,]),'MINUS':([8,13,16,17,19,20,21,23,24,25,27,31,32,33,34,35,36,37,38,39,40,41,43,49,50,51,52,53,54,55,56,57,58,],[21,21,21,32,-25,-26,21,21,21,21,32,21,21,21,21,21,21,21,21,21,21,-31,32,-27,-28,-29,-30,32,32,32,32,32,32,]),'BOOL':([8,16,23,24,25,],[22,22,22,22,22,]),'NOT':([8,16,23,24,25,],[23,23,23,23,23,]),';':([14,15,17,18,19,20,22,27,41,42,48,49,50,51,52,53,54,55,56,57,58,],[28,29,-15,-16,-25,-26,-17,47,-31,-24,-14,-27,-28,-29,-30,-18,-19,-20,-21,-22,-23,]),')':([17,18,19,20,22,30,41,42,44,45,48,49,50,51,52,53,54,55,56,57,58,],[-15,-16,-25,-26,-17,48,-31,-24,59,60,-14,-27,-28,-29,-30,-18,-19,-20,-21,-22,-23,]),'PLUS':([17,19,20,27,41,43,49,50,51,52,53,54,55,56,57,58,],[31,-25,-26,31,-31,31,-27,-28,-29,-30,31,31,31,31,31,31,]),'TIMES':([17,19,20,27,41,43,49,50,51,52,53,54,55,56,57,58,],[33,-25,-26,33,-31,33,33,33,-29,-30,33,33,33,33,33,33,]),'DIVIDE':([17,19,20,27,41,43,49,50,51,52,53,54,55,56,57,58,],[34,-25,-26,34,-31,34,34,34,-29,-30,34,34,34,34,34,34,]),'EQ':([17,19,20,41,43,49,50,51,52,],[35,-25,-26,-31,35,-27,-28,-29,-30,]),'NE':([17,19,20,41,43,49,50,51,52,],[36,-25,-26,-31,36,-27,-28,-29,-30,]),'LT':([17,19,20,41,43,49,50,51,52,],[37,-25,-26,-31,37,-27,-28,-29,-30,]),'GT':([17,19,20,41,43,49,50,51,52,],[38,-25,-26,-31,38,-27,-28,-29,-30,]),'LE':([17,19,20,41,43,49,50,51,52,],[39,-25,-26,-31,39,-27,-28,-29,-30,]),'GE':([17,19,20,41,43,49,50,51,52,],[40,-25,-26,-31,40,-27,-28,-29,-30,]),'ELSE':([46,61,63,64,],[-12,-32,67,-13,]),'END':([46,61,62,63,64,65,66,67,68,71,],[-12,-32,-32,-32,-13,69,70,-32,-11,-10,]),'THEN':([59,],[61,]),'DO':([60,],[62,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'program':([0,],[1,]),'stmt_list':([0,3,11,],[2,12,26,]),'stmt':([0,3,11,],[3,3,3,]),'empty':([0,3,11,65,66,67,71,],[4,4,4,68,68,72,68,]),'block':([0,3,11,65,66,71,],[5,5,5,67,69,75,]),'exp':([8,16,],[15,30,]),'aexp':([8,13,16,21,23,24,25,31,32,33,34,35,36,37,38,39,40,41,42,],[17,27,17,43,45,45,45,51,52,53,54,55,56,57,58,59,60,45,45,]),'bexp':([8,16,23,24,25,41,42,],[18,18,44,46,47,61,62,]),'opt_else':([67,],[70,]),}
+_lr_goto_items = {'program':([0,],[1,]),'stmt_list':([0,3,11,],[2,12,26,]),'stmt':([0,3,11,],[3,3,3,]),'empty':([0,3,11,61,62,63,67,],[4,4,4,64,64,68,64,]),'block':([0,3,11,61,62,67,],[5,5,5,63,65,71,]),'exp':([8,16,],[15,30,]),'aexp':([8,13,16,21,23,24,25,31,32,33,34,35,36,37,38,39,40,],[17,27,17,41,43,43,43,49,50,51,52,53,54,55,56,57,58,]),'bexp':([8,16,23,24,25,],[18,18,42,44,45,]),'opt_else':([63,],[66,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,38 +27,36 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> program","S'",1,None,None,None),
-  ('program -> stmt_list','program',1,'p_grammar','IMP_gram.py',17),
-  ('stmt_list -> stmt stmt_list','stmt_list',2,'p_grammar','IMP_gram.py',19),
-  ('stmt_list -> empty','stmt_list',1,'p_grammar','IMP_gram.py',20),
-  ('stmt -> block','stmt',1,'p_grammar','IMP_gram.py',22),
-  ('stmt -> ID ASSIGN aexp ;','stmt',4,'p_grammar','IMP_gram.py',23),
-  ('stmt -> GET ID ;','stmt',3,'p_grammar','IMP_gram.py',24),
-  ('stmt -> PUT exp ;','stmt',3,'p_grammar','IMP_gram.py',25),
-  ('stmt -> IF ( bexp ) THEN block opt_else END','stmt',8,'p_grammar','IMP_gram.py',26),
-  ('stmt -> WHILE ( bexp ) DO block END','stmt',7,'p_grammar','IMP_gram.py',27),
-  ('opt_else -> ELSE block','opt_else',2,'p_grammar','IMP_gram.py',29),
-  ('opt_else -> empty','opt_else',1,'p_grammar','IMP_gram.py',30),
-  ('block -> { stmt_list }','block',3,'p_grammar','IMP_gram.py',32),
-  ('block -> empty','block',1,'p_grammar','IMP_gram.py',33),
-  ('exp -> ( exp )','exp',3,'p_grammar','IMP_gram.py',35),
-  ('exp -> aexp','exp',1,'p_grammar','IMP_gram.py',36),
-  ('exp -> bexp','exp',1,'p_grammar','IMP_gram.py',37),
-  ('bexp -> BOOL','bexp',1,'p_grammar','IMP_gram.py',39),
-  ('bexp -> aexp EQ aexp','bexp',3,'p_grammar','IMP_gram.py',40),
-  ('bexp -> aexp NE aexp','bexp',3,'p_grammar','IMP_gram.py',41),
-  ('bexp -> aexp LT aexp','bexp',3,'p_grammar','IMP_gram.py',42),
-  ('bexp -> aexp GT aexp','bexp',3,'p_grammar','IMP_gram.py',43),
-  ('bexp -> aexp LE aexp','bexp',3,'p_grammar','IMP_gram.py',44),
-  ('bexp -> aexp GE aexp','bexp',3,'p_grammar','IMP_gram.py',45),
-  ('bexp -> NOT bexp','bexp',2,'p_grammar','IMP_gram.py',46),
-  ('bexp -> bexp AND bexp','bexp',3,'p_grammar','IMP_gram.py',47),
-  ('bexp -> bexp OR bexp','bexp',3,'p_grammar','IMP_gram.py',48),
-  ('aexp -> INT','aexp',1,'p_grammar','IMP_gram.py',50),
-  ('aexp -> ID','aexp',1,'p_grammar','IMP_gram.py',51),
-  ('aexp -> aexp PLUS aexp','aexp',3,'p_grammar','IMP_gram.py',52),
-  ('aexp -> aexp MINUS aexp','aexp',3,'p_grammar','IMP_gram.py',53),
-  ('aexp -> aexp TIMES aexp','aexp',3,'p_grammar','IMP_gram.py',54),
-  ('aexp -> aexp DIVIDE aexp','aexp',3,'p_grammar','IMP_gram.py',55),
-  ('aexp -> MINUS aexp','aexp',2,'p_grammar','IMP_gram.py',56),
-  ('empty -> <empty>','empty',0,'p_empty','IMP_gram.py',62),
+  ('program -> stmt_list','program',1,'p_grammar','IMP_gram.py',16),
+  ('stmt_list -> stmt stmt_list','stmt_list',2,'p_grammar','IMP_gram.py',18),
+  ('stmt_list -> empty','stmt_list',1,'p_grammar','IMP_gram.py',19),
+  ('stmt -> block','stmt',1,'p_grammar','IMP_gram.py',21),
+  ('stmt -> ID ASSIGN aexp ;','stmt',4,'p_grammar','IMP_gram.py',22),
+  ('stmt -> INPUT ID ;','stmt',3,'p_grammar','IMP_gram.py',23),
+  ('stmt -> PRINT exp ;','stmt',3,'p_grammar','IMP_gram.py',24),
+  ('stmt -> IF ( bexp ) THEN block opt_else END','stmt',8,'p_grammar','IMP_gram.py',25),
+  ('stmt -> WHILE ( bexp ) DO block END','stmt',7,'p_grammar','IMP_gram.py',26),
+  ('opt_else -> ELSE block','opt_else',2,'p_grammar','IMP_gram.py',28),
+  ('opt_else -> empty','opt_else',1,'p_grammar','IMP_gram.py',29),
+  ('block -> { stmt_list }','block',3,'p_grammar','IMP_gram.py',31),
+  ('block -> empty','block',1,'p_grammar','IMP_gram.py',32),
+  ('exp -> ( exp )','exp',3,'p_grammar','IMP_gram.py',34),
+  ('exp -> aexp','exp',1,'p_grammar','IMP_gram.py',35),
+  ('exp -> bexp','exp',1,'p_grammar','IMP_gram.py',36),
+  ('bexp -> BOOL','bexp',1,'p_grammar','IMP_gram.py',38),
+  ('bexp -> aexp EQ aexp','bexp',3,'p_grammar','IMP_gram.py',39),
+  ('bexp -> aexp NE aexp','bexp',3,'p_grammar','IMP_gram.py',40),
+  ('bexp -> aexp LT aexp','bexp',3,'p_grammar','IMP_gram.py',41),
+  ('bexp -> aexp GT aexp','bexp',3,'p_grammar','IMP_gram.py',42),
+  ('bexp -> aexp LE aexp','bexp',3,'p_grammar','IMP_gram.py',43),
+  ('bexp -> aexp GE aexp','bexp',3,'p_grammar','IMP_gram.py',44),
+  ('bexp -> NOT bexp','bexp',2,'p_grammar','IMP_gram.py',45),
+  ('aexp -> INT','aexp',1,'p_grammar','IMP_gram.py',47),
+  ('aexp -> ID','aexp',1,'p_grammar','IMP_gram.py',48),
+  ('aexp -> aexp PLUS aexp','aexp',3,'p_grammar','IMP_gram.py',49),
+  ('aexp -> aexp MINUS aexp','aexp',3,'p_grammar','IMP_gram.py',50),
+  ('aexp -> aexp TIMES aexp','aexp',3,'p_grammar','IMP_gram.py',51),
+  ('aexp -> aexp DIVIDE aexp','aexp',3,'p_grammar','IMP_gram.py',52),
+  ('aexp -> MINUS aexp','aexp',2,'p_grammar','IMP_gram.py',53),
+  ('empty -> <empty>','empty',0,'p_empty','IMP_gram.py',59),
 ]

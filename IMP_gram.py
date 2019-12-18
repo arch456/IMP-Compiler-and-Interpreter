@@ -4,8 +4,7 @@ from ply import yacc
 from IMP_lex import tokens, lexer
 
 # define the precedence and associativity for the language here
-precedence = (('left', 'AND', 'OR'),
-              ('left', 'EQ', 'NE', 'LT', 'GT', 'LE', 'GE'),
+precedence = (('left', 'EQ', 'NE', 'LT', 'GT', 'LE', 'GE'),
               ('left', 'PLUS', 'MINUS'),
               ('left', 'TIMES', 'DIVIDE'),
               ('right', 'UMINUS', 'NOT')
@@ -21,8 +20,8 @@ def p_grammar(_):
 
     stmt : block
          | ID ASSIGN aexp ';'
-         | GET ID ';'
-         | PUT exp ';'      
+         | INPUT ID ';'
+         | PRINT exp ';'      
          | IF '(' bexp ')' THEN block opt_else END
          | WHILE '(' bexp ')' DO block END
 
@@ -44,8 +43,6 @@ def p_grammar(_):
          | aexp LE aexp
          | aexp GE aexp
          | NOT bexp
-         | bexp AND bexp
-         | bexp OR bexp
          
     aexp : INT
          | ID
